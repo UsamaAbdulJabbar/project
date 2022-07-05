@@ -11,6 +11,8 @@ import SmButton from '../smButton';
 import { deleteData, getStudentData } from '../../config/firebase/firebaseMethods';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Typography } from '@mui/material';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -55,17 +57,41 @@ export default function DataTable() {
 
     const DeleteData=(id)=>{
             deleteData("StudentData",id);
+            getStudentData()
+            window.location.reload();
             console.log(id)
-            getStudentData();
     }
     
     //id card genereate
-
+    const dispatch = useDispatch();
     const IdCardGen = (id)=>{
       getStudentData("StudentData",id).then((res)=>{
         console.log(res)
+        dispatch(
+          {
+            type : "DATAFROMTABLE",
+            payload : res,
+          }
+        )
         navigate("/idCardStudent");
        
+      }).catch((err)=>{
+        console.log(err);
+      })
+    }
+
+    const EditScreen=(id)=>{
+      getStudentData("StudentData",id).then((res)=>{
+        console.log(res)
+        
+        navigate("/editScreen")
+        dispatch(
+          {
+            type : "DATAFROMTABLE",
+            payload : res,
+          }
+        )
+             
       }).catch((err)=>{
         console.log(err);
       })
@@ -92,16 +118,16 @@ export default function DataTable() {
           {getData.map((e) => (
             <StyledTableRow >
               
-              <StyledTableCell align="center">{e.name}</StyledTableCell>
-              <StyledTableCell align="center">{e.fatherName}</StyledTableCell>
-              <StyledTableCell align="center">{e.class}</StyledTableCell>
-              <StyledTableCell align="center">{e.section}</StyledTableCell>
-              <StyledTableCell align="center">{e.contact}</StyledTableCell>
-              <StyledTableCell align="center">{e.cnic}</StyledTableCell>
-              <StyledTableCell align="center">{e.address}</StyledTableCell>
+              <StyledTableCell align="center"><Typography variant='h5'>{e.name}</Typography></StyledTableCell>
+              <StyledTableCell align="center"><Typography variant='h5'>{e.fatherName}</Typography></StyledTableCell>
+              <StyledTableCell align="center"><Typography variant='h5'>{e.class}</Typography></StyledTableCell>
+              <StyledTableCell align="center"><Typography variant='h5'>{e.section}</Typography></StyledTableCell>
+              <StyledTableCell align="center"><Typography variant="h5">{e.contact}</Typography></StyledTableCell>
+              <StyledTableCell align="center"><Typography variant='h5'>{e.cnic}</Typography></StyledTableCell>
+              <StyledTableCell align="center"><Typography variant='h5'>{e.address}</Typography></StyledTableCell>
               <StyledTableCell align="center">
                 <Box sx={{display:"flex", justifyContent:"center"}}>
-                    <Box sx={{padding:"5px"}}><SmButton  label="Edit" variant="contained" /></Box>
+                    <Box sx={{padding:"5px"}}><SmButton onClick={()=>EditScreen(e.id)}  label="Edit" variant="contained" /></Box>
                     <Box sx={{padding:"5px"}}><SmButton onClick={() => DeleteData(e.id)} label="Delete" variant='contained' color='error'/></Box>
                 </Box>
                 

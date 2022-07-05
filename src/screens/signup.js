@@ -35,12 +35,15 @@ function Signup (){
             alert("Password is requires and must be greater then 6 character")
             return;
         }
-        
+        setLoader(true);
         console.log(obj);
-        signUpUser(obj).then(()=>{
-            alert("User Create Successfully")
+        signUpUser(obj).then((res)=>{
+            console.log(res)
+            alert("User Create Successfully");
+            setLoader(false);
         }).catch((err)=>{
             alert(err);
+            setLoader(false);
         })
        
         //SignUp Firebase Authentication

@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Dashboard from "../../screens/dashboard";
 import AddStudentData from "../../screens/dashboardPages/addStudent";
+import EditStudentData from "../../screens/dashboardPages/editScreen";
 import FeeVoucher from "../../screens/dashboardPages/feeVoucher";
 import IdCardStudent from "../../screens/dashboardPages/idCardStudent";
 import ViewStudentData from "../../screens/dashboardPages/viewStudentData";
@@ -28,6 +29,7 @@ function RoutingApp() {
                 <Route path="/viewStudentData" element={<ViewStudentData />} />
                 <Route path="/idCardStudent" element={<IdCardStudent/>} />
                 <Route path="/feeVoucher" element={<FeeVoucher />} />
+                <Route path="editScreen" element={<EditStudentData/>} />
 
             </Routes>
 

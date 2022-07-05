@@ -53,6 +53,7 @@ function ResponsiveDrawer(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
+  
   const userFromRedux = useSelector((a)=>a);
 
   const navigate = useNavigate();

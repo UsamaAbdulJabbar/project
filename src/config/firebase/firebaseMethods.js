@@ -37,7 +37,11 @@ const database = getDatabase(app);
 //Save Data 
 let saveData = ( nodeName,userObj, uid) => {
     userObj.id = uid;
-    set(ref(database,`${nodeName}/${uid}`),userObj);
+    return new Promise((resolve,reject)=>{
+      set(ref(database,`${nodeName}/${uid}`),userObj);
+      resolve("User Created Successfully")
+      
+    })
 };
 
 //Get Data 
@@ -56,20 +60,21 @@ let getData = (nodeName,uid)=>{
 
 //User SingUp
 let signUpUser = (userObj) => {
-    return new Promise(()=>{
+    return new Promise((resolve,reject)=>{
         createUserWithEmailAndPassword(auth, userObj.email, userObj.password)
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
           console.log(user.uid)
-          saveData("users",userObj,user.uid).then(()=>{
-              
+          saveData("users",userObj,user.uid).then((res)=>{
+              resolve(res)
           });
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          reject(error)
          
           // ..
         });

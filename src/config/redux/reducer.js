@@ -1,7 +1,9 @@
 const INITIAL_STATE = {
     user : null,
     student : null,
+    
 }
+ 
 
 
 

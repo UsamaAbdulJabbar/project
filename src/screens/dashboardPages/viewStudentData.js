@@ -18,7 +18,7 @@ function ViewStudentData(){
         <Typography variant="h1">
            View Student Data Page
         </Typography>
-        <Box>
+        <Box sx={{padding:"10px"}}>
             <Box>
                 <SmButton label="Add New Student" variant="contained" onClick={AddNewData} />
             </Box>

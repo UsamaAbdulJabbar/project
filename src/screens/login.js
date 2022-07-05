@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { login } from "../config/firebase/firebaseMethods";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import {useNavigate} from "react-router-dom";
+import SmAlert from "../components/alert";
 
 
 function Login (){
@@ -32,7 +33,7 @@ function Login (){
         setLoader(true);
         login(obj).then((res)=>{
             console.log(res);
-            alert("Login Successfully");
+            alert("login Successfully")
             setLoader(false);
             dispatch({
                 type : "DATAFROMLOGIN",
@@ -46,7 +47,7 @@ function Login (){
 
         
 
-        
+
     
 
         
@@ -78,6 +79,10 @@ function Login (){
             <Box>
                 <SmButton loading={loader} label='Login' variant='contained' onClick={UserLogin} />
             </Box>
+
+            
+
+            
         </Box>
         
         </>
